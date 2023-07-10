@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="/PageCss/body.css" rel="stylesheet">
+    <title>Location | Wandrlust</title>
+    <style>
+        .card {
+            width: 25%;
+        }
+        .card-inner-container {
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            gap: 3rem;
+            padding-bottom: 3rem;
+        }
+
+        img {
+            width: 100%;
+            height: 15vw;
+            object-fit: cover;
+        }
+    </style>
+</head>
+
+<body>
+    <%- include('partials/navbar.ejs', { name: name, isLoggedIn: isLoggedIn, email: email}); %>
+        <div id='map' style='width: 100%; height: 500px;'></div>
+        <h2 style="font-weight: bold; text-align: center; padding: 2rem;">Search and View our Suggested Locations
+        </h2>
+        <div class="card-container">
+            <div class="card-inner-container">
+                <%- include('partials/card.ejs', { 
+                    url : 'https://upload.wikimedia.org/wikipedia/commons/6/69/Vidhana_Soudha_Bangalore.jpg',
+                    name: 'Bangalore',
+                    body: 'Bangalore, also known as Bengaluru, is a vibrant city in southern India famous for its IT industry, pleasant climate, and diverse culture.'
+                }); %>
+                <%- include('partials/card.ejs', { 
+                    url : 'https://www.tamilnadutourism.tn.gov.in/img/pages/large-desktop/ooty-1655457424_bca80f81e8391ebdaaca.webp',
+                    name: 'Ooty',
+                    body: 'Ooty is a popular hill station located in the Nilgiri Hills of Tamil Nadu, southern India, known for its scenic beauty, tea gardens, and pleasant weather.'
+                }); %>
+                <%- include('partials/card.ejs', { 
+                    url : 'https://www.ibef.org/assets/images/states/Puducherry-2.jpg',
+                    name: 'Puducherry',
+                    body: 'Puducherry is a French Union Territory town bounded by the southeastern Tamil Nadu state.'
+                }); %>
+            </div>
+        </div>
+        <div class="card-container">
+            <div class="card-inner-container">
+                <%- include('partials/card.ejs', { 
+                    url : 'https://upload.wikimedia.org/wikipedia/commons/f/fc/BeachFun.jpg',
+                    name: 'Goa',
+                    body: 'Goa is a state in western India which is known for its beautiful beaches, rich history, and unique culture.'
+                }); %>
+                <%- include('partials/card.ejs', { 
+                    url : 'https://res.cloudinary.com/thrillophilia/image/upload/c_fill,f_auto,fl_progressive.strip_profile,g_auto,q_auto/v1/filestore/528kkde1agpog8r1j8w435yrb7qt_sxhbs.png',
+                    name: 'Yelagiri',
+                    body: 'Yelagiri is a popular weekend getaway destination, a small hill station located in the Vellore district of Tamil Nadu.'
+                }); %>
+                <%- include('partials/card.ejs', { 
+                    url : 'https://www.tamilnadutourism.tn.gov.in/img/pages/large-desktop/kanyakumari-1656091428_cf69d9a9dbec82018046.jpg',
+                    name: 'Kanyakumari',
+                    body: `Kanyakumari is a coastal town in the state of Tamil Nadu on India's southern tip.`
+                }); %>
+            </div>
+        </div>
+        <div class="card-container">
+            <div class="card-inner-container">
+                <%- include('partials/card.ejs', { 
+                    url : 'https://hblimg.mmtcdn.com/content/hubble/img/coorg/mmt/destination/m_destination-coorg-landscape_l_400_640.jpg',
+                    name: 'Coorg',
+                    body: 'Coorg is a district in the state of Karnataka, known for its coffee plantations, stunning scenery, and rich cultural heritage.'
+                }); %>
+                <%- include('partials/card.ejs', { 
+                    url : 'https://www.tamilnadutourism.tn.gov.in/img/pages/large-desktop/kanyakumari-1656091428_cf69d9a9dbec82018046.jpg',
+                    name: 'Hyderabad',
+                    body: `Hyderabad is a city in southern India, known for its rich history, culture, and cuisine, including the iconic Hyderabadi biryani.`
+                }); %>
+                <%- include('partials/card.ejs', { 
+                    url : 'https://dd0w3jaz1pep7.cloudfront.net/assets/images/tourism/city/Kurnool/kurnool-4fcd3fcde44d78692f22e936.jpg',
+                    name: 'Kurnool',
+                    body: `Kurnool is a city in the state of Andhra Pradesh, southern India, known for its rich history, ancient temples, and natural beauty.`
+                }); %>
+            </div>
+        </div>
+        <div class="card-container">
+            <div class="card-inner-container">
+                <%- include('partials/card.ejs', { 
+                    url : 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/ee/Fi90_ENVIAEBIqS.jpg/800px-Fi90_ENVIAEBIqS.jpg',
+                    name: 'Mumbai',
+                    body: 'Mumbai, also known as the city of dreams, is a bustling metropolis on the west coast of India, famous for its vibrant culture, delicious street food, and iconic landmarks like the Gateway of India'
+                }); %>
+                <%- include('partials/card.ejs', { 
+                    url : 'https://cdn.britannica.com/91/110191-050-7BCFD56B/Victoria-Memorial-Hall-Kolkata-India.jpg',
+                    name: 'Kolkata',
+                    body: `Kolkata, also known as the City of Joy, is a vibrant metropolis in eastern India, famous for its rich cultural heritage, delicious cuisine, and bustling markets.`
+                }); %>
+                <%- include('partials/card.ejs', { 
+                    url : 'https://themangoresort.com/Content/img/diu/diu.jpg',
+                    name: 'Diu',
+                    body: `Diu, a small island off the coast of Gujarat, India, is a tranquil destination with pristine beaches, Portuguese architecture, and a laid-back vibe.`
+                }); %>
+            </div>
+        </div>
+        <div class="card-container">
+            <div class="card-inner-container">
+                <%- include('partials/card.ejs', { 
+                    url : 'https://upload.wikimedia.org/wikipedia/commons/1/1d/GE_road_at_vip_chowk_in_Raipur.jpg',
+                    name: 'Raipur',
+                    body: 'Raipur is the capital city of the Indian state of Chhattisgarh, known for its rich cultural heritage, bustling markets, and delicious cuisine.'
+                }); %>
+                <%- include('partials/card.ejs', { 
+                    url : 'https://www.tourism.rajasthan.gov.in/content/dam/rajasthan-tourism/english/city/explore/Toad%20Rock%20View%20Point.jpg',
+                    name: 'Mount Abu',
+                    body: `Mount Abu is a popular hill station in western India, known for its scenic beauty, historic temples, and cool climate.`
+                }); %>
+                <%- include('partials/card.ejs', { 
+                    url : 'https://hblimg.mmtcdn.com/content/hubble/img/gulmarg/mmt/destination/m_Gulmarg_activity_mountains_l_460_690.jpg',
+                    name: 'Gulmarg',
+                    body: `Gulmarg is a picturesque hill station located in the Indian state of Jammu and Kashmir, famous for its skiing slopes, scenic beauty, and adventure activities.`
+                }); %>
+            </div>
+        </div>
+        <div class="card-container">
+            <div class="card-inner-container">
+                <%- include('partials/card.ejs', { 
+                    url : 'https://www.travelandleisure.com/thmb/iAIrOVW7yWrDG8pZBpKMOvEGuNQ=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/new-delhi-india-NEWDELHITG0721-60d592e1603349298a0206d67d08582b.jpg',
+                    name: 'New Delhi',
+                    body: 'New Delhi is the capital city of India, known for its historic landmarks, vibrant culture, and diverse cuisine.'
+                }); %>
+                <%- include('partials/card.ejs', { 
+                    url : 'https://www.kaziranga-national-park.com/wp-content/uploads/2019/05/kaziranga-national-park2.jpg',
+                    name: 'Kaziranga National Park',
+                    body: `Kaziranga National Park is a UNESCO World Heritage Site located in Assam, India, known for its conservation of one-horned rhinoceroses and diverse wildlife.`
+                }); %>
+                <%- include('partials/card.ejs', { 
+                    url : 'https://www.treebo.com/blog/wp-content/uploads/2022/11/Header-image-Bhopal.jpg',
+                    name: 'Bhopal',
+                    body: `Gulmarg is a picturesque hill station located in the Indian state of Jammu and Kashmir, famous for its skiing slopes, scenic beauty, and adventure activities.`
+                }); %>
+            </div>
+        </div>
+        <div class="card-container">
+            <div class="card-inner-container">
+                <%- include('partials/card.ejs', { 
+                    url : 'https://images1.livehindustan.com/uploadimage/library/2018/06/21/16_9/16_9_1/PATNA_1529523015_1529523015.JPG',
+                    name: 'Patna',
+                    body: 'Patna is the capital city of the Indian state of Bihar, known for its ancient history, cultural diversity, and religious significance.'
+                }); %>
+                <%- include('partials/card.ejs', { 
+                    url : 'https://upload.wikimedia.org/wikipedia/commons/b/bd/Taj_Mahal%2C_Agra%2C_India_edit3.jpg',
+                    name: 'Agra',
+                    body: `Agra is a city in northern India, famous for its iconic Taj Mahal, a UNESCO World Heritage Site and one of the Seven Wonders of the World.`
+                }); %>
+                <%- include('partials/card.ejs', { 
+                    url : 'https://www.tourmyindia.com/blog//wp-content/uploads/2019/02/Rishikesh-Yoga-City-India.jpg',
+                    name: 'Dehradun',
+                    body: `Dehradun is a picturesque city located in the foothills of the Himalayas, known for its pleasant weather, natural beauty, and historical significance.`
+                }); %>
+            </div>
+        </div>
+        <script>
+            mapboxgl.accessToken = 'pk.eyJ1IjoidmFpYmhhdjA4MDYiLCJhIjoiY2xmaTFxMGc2MDd2bzN5cDJ1d2ExeDBtaSJ9.ksRFszOL1mPE2B0oxLvAJA';
+            const map = new mapboxgl.Map({
+                container: 'map', // container ID
+                style: 'mapbox://styles/mapbox/streets-v12', // style URL
+                center: [77.5946, 12.9716], // starting position [lng, lat]
+                zoom: 5, // starting zoom
+            });
+
+            const marker1 = new mapboxgl.Marker()
+                .setLngLat([77.5946, 12.9716])
+                .setPopup(
+                    new mapboxgl.Popup({ offset: 25 })
+                        .setHTML(
+                            `<h6>Bengaluru</h6>
+                        <p>Bangalore, also known as Bengaluru, is a vibrant city in southern India famous for its IT industry, pleasant climate, and diverse culture.</p>`
+                        )
+                )
+                .addTo(map);
+
+            const marker2 = new mapboxgl.Marker()
+                .setLngLat([76.6950, 11.4102])
+                .setPopup(
+                    new mapboxgl.Popup({ offset: 25 })
+                        .setHTML(
+                            `<h6>Ooty</h6>
+                        <p>Ooty is a popular hill station located in the Nilgiri Hills of Tamil Nadu, southern India, known for its scenic beauty, tea gardens, and pleasant weather.</p>`
+                        )
+                )
+                .addTo(map);
+
+            const marker3 = new mapboxgl.Marker()
+                .setLngLat([79.8083, 11.9416])
+                .setPopup(
+                    new mapboxgl.Popup({ offset: 25 })
+                        .setHTML(
+                            `<h6>Puducherry</h6>
+                        <p>Puducherry is a French Union Territory town bounded by the southeastern Tamil Nadu state.</p>`
+                        )
+                )
+                .addTo(map);
+
+            const marker4 = new mapboxgl.Marker()
+                .setLngLat([74.1240, 15.2993])
+                .setPopup(
+                    new mapboxgl.Popup({ offset: 25 })
+                        .setHTML(
+                            `<h6>Goa</h6>
+                        <p>Goa is a state in western India which is known for its beautiful beaches, rich history, and unique culture.</p>`
+                        )
+                )
+                .addTo(map);
+
+            const marker5 = new mapboxgl.Marker()
+                .setLngLat([78.6345, 12.5856])
+                .setPopup(
+                    new mapboxgl.Popup({ offset: 25 })
+                        .setHTML(
+                            `<h6>Yelagiri</h6>
+                        <p>Yelagiri is a popular weekend getaway destination, a small hill station located in the Vellore district of Tamil Nadu.</p>`
+                        )
+                )
+                .addTo(map);
+
+            const marker6 = new mapboxgl.Marker()
+                .setLngLat([77.5385, 8.0883])
+                .setPopup(
+                    new mapboxgl.Popup({ offset: 25 })
+                        .setHTML(
+                            `<h6>Kanyakumari</h6>
+                        <p>Kanyakumari is a coastal town in the state of Tamil Nadu on India's southern tip.</p>`
+                        )
+                )
+                .addTo(map);
+
+            const marker7 = new mapboxgl.Marker()
+                .setLngLat([75.7382, 12.4244])
+                .setPopup(
+                    new mapboxgl.Popup({ offset: 25 })
+                        .setHTML(
+                            `<h6>Coorg</h6>
+                        <p>Coorg is a district in the state of Karnataka, known for its coffee plantations, stunning scenery, and rich cultural heritage.</p>`
+                        )
+                )
+                .addTo(map);
+
+            const marker8 = new mapboxgl.Marker()
+                .setLngLat([78.4867, 17.3850])
+                .setPopup(
+                    new mapboxgl.Popup({ offset: 25 })
+                        .setHTML(
+                            `<h6>Hyderabad</h6>
+                        <p>Hyderabad is a city in southern India, known for its rich history, culture, and cuisine, including the iconic Hyderabadi biryani.</p>`
+                        )
+                )
+                .addTo(map);
+
+            const marker9 = new mapboxgl.Marker()
+                .setLngLat([78.0373, 15.8281])
+                .setPopup(
+                    new mapboxgl.Popup({ offset: 25 })
+                        .setHTML(
+                            `<h6>Kurnool</h6>
+                        <p>Kurnool is a city in the state of Andhra Pradesh, southern India, known for its rich history, ancient temples, and natural beauty.</p>`
+                        )
+                )
+                .addTo(map);
+
+            const marker10 = new mapboxgl.Marker()
+                .setLngLat([72.8777, 19.0760])
+                .setPopup(
+                    new mapboxgl.Popup({ offset: 25 })
+                        .setHTML(
+                            `<h6>Mumbai</h6>
+                        <p>Mumbai, also known as the city of dreams, is a bustling metropolis on the west coast of India, famous for its vibrant culture, delicious street food, and iconic landmarks like the Gateway of India</p>`
+                        )
+                )
+                .addTo(map);
+
+            const marker11 = new mapboxgl.Marker()
+                .setLngLat([88.3639, 22.5726])
+                .setPopup(
+                    new mapboxgl.Popup({ offset: 25 })
+                        .setHTML(
+                            `<h6>Kolkata</h6>
+                        <p>Kolkata, also known as the City of Joy, is a vibrant metropolis in eastern India, famous for its rich cultural heritage, delicious cuisine, and bustling markets.</p>`
+                        )
+                )
+                .addTo(map);
+
+            const marker12 = new mapboxgl.Marker()
+                .setLngLat([70.9874, 20.7144])
+                .setPopup(
+                    new mapboxgl.Popup({ offset: 25 })
+                        .setHTML(
+                            `<h6>Diu</h6>
+                        <p>Diu, a small island off the coast of Gujarat, India, is a tranquil destination with pristine beaches, Portuguese architecture, and a laid-back vibe.</p>`
+                        )
+                )
+                .addTo(map);
+
+            const marker13 = new mapboxgl.Marker()
+                .setLngLat([81.6296, 21.2514])
+                .setPopup(
+                    new mapboxgl.Popup({ offset: 25 })
+                        .setHTML(
+                            `<h6>Raipur</h6>
+                        <p>Raipur is the capital city of the Indian state of Chhattisgarh, known for its rich cultural heritage, bustling markets, and delicious cuisine.</p>`
+                        )
+                )
+                .addTo(map);
+
+            const marker14 = new mapboxgl.Marker()
+                .setLngLat([72.7156, 24.5926])
+                .setPopup(
+                    new mapboxgl.Popup({ offset: 25 })
+                        .setHTML(
+                            `<h6>Mount Abu</h6>
+                        <p>Mount Abu is a popular hill station in western India, known for its scenic beauty, historic temples, and cool climate.</p>`
+                        )
+                )
+                .addTo(map);
+
+            const marker15 = new mapboxgl.Marker()
+                .setLngLat([74.3805, 34.0484])
+                .setPopup(
+                    new mapboxgl.Popup({ offset: 25 })
+                        .setHTML(
+                            `<h6>Gulmarg</h6>
+                        <p>Gulmarg is a picturesque hill station located in the Indian state of Jammu and Kashmir, famous for its skiing slopes, scenic beauty, and adventure activities.</p>`
+                        )
+                )
+                .addTo(map);
+
+            const marker16 = new mapboxgl.Marker()
+                .setLngLat([77.2090, 28.6139])
+                .setPopup(
+                    new mapboxgl.Popup({ offset: 25 })
+                        .setHTML(
+                            `<h6>New Delhi</h6>
+                        <p>New Delhi is the capital city of India, known for its historic landmarks, vibrant culture, and diverse cuisine.</p>`
+                        )
+                )
+                .addTo(map);
+
+            const marker17 = new mapboxgl.Marker()
+                .setLngLat([93.1711, 26.5775])
+                .setPopup(
+                    new mapboxgl.Popup({ offset: 25 })
+                        .setHTML(
+                            `<h6>Kaziranga National Park</h6>
+                        <p>Kaziranga National Park is a UNESCO World Heritage Site located in Assam, India, known for its conservation of one-horned rhinoceroses and diverse wildlife.</p>`
+                        )
+                )
+                .addTo(map);
+
+            const marker18 = new mapboxgl.Marker()
+                .setLngLat([77.4126, 23.2599])
+                .setPopup(
+                    new mapboxgl.Popup({ offset: 25 })
+                        .setHTML(
+                            `<h6>Bhopal</h6>
+                        <p>Bhopal is the capital city of the Indian state of Madhya Pradesh, known for its scenic beauty, historic monuments, and rich culture.</p>`
+                        )
+                )
+                .addTo(map);
+
+            const marker19 = new mapboxgl.Marker()
+                .setLngLat([85.1376, 25.5941])
+                .setPopup(
+                    new mapboxgl.Popup({ offset: 25 })
+                        .setHTML(
+                            `<h6>Patna</h6>
+                        <p>Patna is the capital city of the Indian state of Bihar, known for its ancient history, cultural diversity, and religious significance.</p>`
+                        )
+                )
+                .addTo(map);
+
+            const marker20 = new mapboxgl.Marker()
+                .setLngLat([78.0081, 27.1767])
+                .setPopup(
+                    new mapboxgl.Popup({ offset: 25 })
+                        .setHTML(
+                            `<h6>Agra</h6>
+                        <p>Agra is a city in northern India, famous for its iconic Taj Mahal, a UNESCO World Heritage Site and one of the Seven Wonders of the World.</p>`
+                        )
+                )
+                .addTo(map);
+
+            const marker21 = new mapboxgl.Marker()
+                .setLngLat([78.0322, 30.3165])
+                .setPopup(
+                    new mapboxgl.Popup({ offset: 25 })
+                        .setHTML(
+                            `<h6>Dehradun</h6>
+                        <p>Dehradun is a picturesque city located in the foothills of the Himalayas, known for its pleasant weather, natural beauty, and historical significance.</p>`
+                        )
+                )
+                .addTo(map);
+
+        </script>
+        <%- include('partials/footer') %>
+</body>
+
+</html>
+</body>
+
+</html>

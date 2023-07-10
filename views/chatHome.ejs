@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway&display=swap" rel="stylesheet">
+    <title>ChatCord App</title>
+</head>
+
+<body>
+    <%- include('partials/navbar.ejs', { name: name, isLoggedIn: isLoggedIn, email: email}); %>
+        <div style="display: flex; justify-content: center;">
+            <div class="join-container"
+                style="text-align: center; background-color: rgb(240, 242, 242); height: 30rem ;width: 30%;margin-top: 7rem; display: flex; align-items: center; flex-direction: column; gap: 3rem; border: 5px solid #f94566; padding: 1rem; border-radius: 1rem; box-shadow: 10px 5px 5px gainsboro;">
+                <header class="join-header"
+                    style="font-weight: bold; font-family: 'Raleway', sans-serif; color: #f94566; width: 100%; border-radius: 1rem; padding: .5rem;">
+                    <h1>WandrChat</h1>
+                    <hr style="background-color: #f94566; border: none; height: 4px;">
+                </header>
+                <main class="join-main">
+                    <form method="get" action="/chat" style="display: flex; flex-direction: column; gap: 5rem; align-items: center;">
+                        <div style="display: flex; flex-direction: column; gap: 3rem">
+                            <input style="font-size: 1.5rem; background-color: gainsboro; border-radius: 10px; padding: 5px;" type="text" name="username" id="username" placeholder="Enter username" required />
+                            <select name="room" id="room" style="background-color: gainsboro; font-size: 1.5rem; border-radius: 10px; padding: 5px;">
+                                <option value="Room 1">Room 1</option>
+                                <option value="Room 2">Room 2</option>
+                                <option value="Room 3">Room 3</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn"
+                            style="background-color: #f94566; font-weight: 500; color: white; width: 40%">Join Chat</button>
+                    </form>
+                </main>
+            </div>
+        </div>
+</body>
+
+</html>

@@ -1,0 +1,438 @@
+<html lang="en">
+
+<head>
+    <title>Budget Tracker | Wandrlust</title>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css"
+        integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/css/materialize.min.css'>
+    <link href="https://fonts.googleapis.com/css?family=Abril+Fatface" rel="stylesheet">
+    <link href="/PageCss/budget.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="budget-app">
+        <div class="budget-header card-panel black lighten-2 grey-text text-lighten-5"
+            style="display: flex; justify-content: space-between; align-items: center;">
+            <div style="display: flex; align-items: center;">
+                <h5
+                    style="color: #F94566; text-align: left; padding-right: 5%; font-weight: bold; font-family: Georgia, 'Times New Roman', serif;">
+                    <a href="/" style="color: #F94566; text-decoration: none;">WandrLust</a></h5>
+                <div style="display: flex;">
+                    <a href="/"
+                        style="color: white; text-decoration: none; margin-right: 20px; font-family: Arial, sans-serif; font-size: 17px;">Home</a>
+                    <a href="/locations"
+                        style="color: white; text-decoration: none; margin-right: 20px; ; font-family: Arial, sans-serif; font-size: 17px;">Locations</a>
+                    <a href="/contact"
+                        style="color: white; text-decoration: none; margin-right: 20px; font-family: Arial, sans-serif; font-size: 17px;">Feeds</a>
+                    <a href="/feed"
+                        style="color: white; text-decoration: none; margin-right: 20px; font-family: Arial, sans-serif; font-size: 17px;">FAQ</a>
+                    <a href="/faq"
+                        style="color: white; text-decoration: none; margin-right: 20px;  font-family: Arial, sans-serif; font-size: 17px;">Contact</a>
+                    <a href="/about"
+                        style="color: white; text-decoration: none; margin-right: 20px;  font-family: Arial, sans-serif; font-size: 17px;">About</a>
+                </div>
+            </div>
+            <h5
+                style="color: #F94566; text-align: right; padding-right: 5%; font-weight: bold; font-family: Georgia, 'Times New Roman', serif;">
+                Budget Tracker</h5>
+        </div>
+
+
+        <div class="row">
+
+            <div class="col m7">
+                <a class="waves-effect waves-light btn-small modal-trigger black" href="#incomeFormModal"
+                    style="color: #F94566;"><i class="material-icons right" style="color: #F94566;">add</i>Add
+                    Income</a>
+                <a class="waves-effect waves-light btn-small modal-trigger black" href="#expenseFormModal"
+                    style="color: #F94566;"><i class="material-icons right" style="color: #F94566;">add</i>Add
+                    Expense</a>
+                <table class="highlight budget-table">
+                    <thead>
+                        <tr>
+                            <th>+/-</th>
+                            <th>Category</th>
+                            <th>Sub Category</th>
+                            <th>Description</th>
+                            <th>Amount</th>
+                        </tr>
+                    </thead>
+
+                    <tbody></tbody>
+                </table>
+            </div>
+
+            <div class="col m5">
+
+                <div class="col m12">
+                    <h6 class="center-align">Spending by Category</h6>
+                    <canvas id="expenseGraph" width="400" height="200"></canvas>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- Modals -->
+    <div id="incomeFormModal" class="modal">
+        <div class="modal-content">
+            <form class="income-form col s12">
+                <label>Type</label>
+                <select class="browser-default">
+                    <option value="" disabled selected>Choose Income Type</option>
+                    <option value="active">Active</option>
+                    <option value="passive">Passive</option>
+                </select>
+
+                <div class="input-field">
+                    <input id="amount" type="number">
+                    <label for="amount">Monthly Amount</label>
+                </div>
+
+                <div class="input-field">
+                    <input id="description" type="text">
+                    <label for="description">Description (Optional)</label>
+                </div>
+                <button class="btn waves-effect waves-light black" style="color: #F94566;" type="submit"
+                    name="action">Add
+                    <i class="material-icons right" style="color: #F94566;">add</i>
+                </button>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <a href="#!" class="modal-close waves-effect waves-green btn-flat">Close</a>
+        </div>
+    </div>
+
+    <div id="expenseFormModal" class="modal">
+        <div class="modal-content">
+            <form class="expense-form col s12">
+                <label for="expenseCat">Expense Category</label>
+                <select class="browser-default" id="expenseCat">
+                    <option value="" disabled selected>Choose Expense Category</option>
+                    <option value="food">Food</option>
+                    <option value="loan">EMI</option>
+                    <option value="rent">Rent</option>
+                    <option value="retail">Retail Non-Food</option>
+                    <option value="insurance">Insurance</option>
+                    <option value="subscriptions">Subscriptions</option>
+                    <option value="healthcare">Healthcare</option>
+                    <option value="utilities">Utilities</option>
+                </select>
+
+                <label for="expenseSubCat">Expense Sub-Category</label>
+                <select class="browser-default" id="expenseSubCat" disabled>
+                    <option value="" disabled selected>Choose Expense Sub-Category</option>
+                    <option value="groceries" data-cat="food">Groceries</option>
+                    <option value="restaurant" data-cat="food">Restaurant</option>
+                    <option value="carInsurance" data-cat="insurance">Car Insurance</option>
+                    <option value="homeInsurance" data-cat="insurance">Homeowners Insurance</option>
+                    <option value="rentersInsurance" data-cat="insurance">Renter's Insurance</option>
+                    <option value="healthInsurance" data-cat="insurance">Health Insurance</option>
+                    <option value="doctorsVisit" data-cat="healthcare">Doctor's Visit</option>
+                    <option value="prescriptions" data-cat="healthcare">Prescriptions</option>
+                    <option value="mortgage" data-cat="loan">Mortgage</option>
+                    <option value="creditCard" data-cat="loan">Bike</option>
+                    <option value="carPayment" data-cat="loan">Car</option>
+                    <option value="rent" data-cat="rent">Rent</option>
+                    <option value="clothes" data-cat="retail">Clothes</option>
+                    <option value="toiletries" data-cat="retail">Toiletries</option>
+                    <option value="netflix" data-cat="subscriptions">Netflix</option>
+                    <option value="internet" data-cat="subscriptions">Internet</option>
+                    <option value="tv" data-cat="subscriptions">Disney +</option>
+                    <option value="amazonPrime" data-cat="subscriptions">Amazon Prime</option>
+                    <option value="amazonMusic" data-cat="subscriptions">Hulu</option>
+                    <option value="water" data-cat="utilities">Water</option>
+                    <option value="gas" data-cat="utilities">Gas</option>
+                </select>
+
+                <div class="input-field">
+                    <input id="paymentAmount" type="number">
+                    <label for="paymentAmount">Payment Amount</label>
+                </div>
+
+                <div class="input-field">
+                    <input id="paymentDescription" type="text">
+                    <label for="paymentDescription">Description (Optional)</label>
+                </div>
+
+                <button class="btn waves-effect waves-light black" style="color: #F94566;" type="submit"
+                    name="action">Add
+                    <i class="material-icons right" style="color: #F94566;">add</i>
+                </button>
+            </form>
+
+        </div>
+        <div class="modal-footer">
+            <a href="#!" class="modal-close waves-effect waves-green btn-flat">Close</a>
+        </div>
+    </div>
+    <!-- partial -->
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/js/materialize.min.js'></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.min.js'></script>
+    <script src='https://unpkg.com/sweetalert/dist/sweetalert.min.js'></script>
+    <script>
+        var tableData = {},
+            incomeArray = [],
+            expenseArray = [],
+            initData = {
+                datasets: [
+                    {
+                        data: [100],
+                        backgroundColor: ["#dddddd"],
+                    },
+                ],
+                labels: ["Spending"],
+            },
+            expenseGraph = document.getElementById("expenseGraph").getContext("2d"),
+            expenseDonutChart = new Chart(expenseGraph, {
+                type: "pie",
+                data: initData,
+            }),
+            expenseColors = {
+                Food: "#dff419",
+                Loan: "#0b4be8",
+                Rent: "#b400fb",
+                "Retail Non-Food": "#6ced02",
+                Insurance: "#046230",
+                Subscriptions: "#08e6e6",
+                Healthcare: "#f30c1f",
+                Utilities: "#5b00f8",
+            };
+
+        $(".modal").modal();
+
+        $("#expenseCat").change(function () {
+            var currentVal = $(this).val(),
+                expensesSub = $("#expenseSubCat"),
+                expenseSubOptions = $("#expenseSubCat option");
+
+            expensesSub.val("");
+
+            expenseSubOptions.each(function () {
+                $(this).show();
+                if ($(this).data("cat") !== currentVal) {
+                    $(this).hide();
+                }
+            });
+
+            expensesSub.prop("disabled", false);
+        });
+
+        $(".income-form").submit(function (e) {
+            e.preventDefault();
+
+            var currentIncObj = {},
+                imcomeTotal = 0;
+
+            currentIncObj["category"] = $(this).find("select").find(":selected").text();
+            currentIncObj["amount"] = $("#amount").val();
+            console.log($("#amount").val())
+            currentIncObj["description"] = $("#description").val();
+            currentIncObj["id"] = Math.floor(Math.random() * 50000 + 10000);
+
+            incomeArray.push(currentIncObj);
+            tableData["income"] = incomeArray;
+
+            updateBudgetTable(tableData);
+            swal({
+                title: "Success!",
+                html: "<input type='text' value='ben'>",
+                button: false,
+                text: "Income Added.",
+                icon: "success",
+                timer: 1000,
+            });
+            $(this)[0].reset();
+        });
+
+        $(".expense-form").submit(function (e) {
+            e.preventDefault();
+
+            var currentExpObj = {},
+                expenseTotal = 0;
+
+            currentExpObj["category"] = $("#expenseCat").find(":selected").text();
+            currentExpObj["subCategory"] = $("#expenseSubCat").find(":selected").text();
+            currentExpObj["amount"] = $("#paymentAmount").val();
+            currentExpObj["description"] = $("#paymentDescription").val();
+            currentExpObj["id"] = Math.floor(Math.random() * 50000 + 10000);
+
+            expenseArray.push(currentExpObj);
+            tableData["expense"] = expenseArray;
+
+            updateBudgetTable(tableData);
+            swal({
+                title: "Success!",
+                button: false,
+                text: "Expense Added.",
+                icon: "success",
+                timer: 1000,
+            });
+            $(this)[0].reset();
+        });
+
+        function updateBudgetTable(data) {
+            var table = $(".budget-table tbody"),
+                incomeHtml = "",
+                expenseHtml = "",
+                expenseTotal = 0,
+                incomeTotal = 0,
+                totalHtml = "",
+                totalSign = "+",
+                expenseObj = {},
+                expenseCatList = [];
+
+            if (data.income) {
+                for (var i = 0; i < data.income.length; i++) {
+                    incomeTotal += Number(data.income[i].amount);
+                    incomeHtml +=
+                        "<tr data-id='" +
+                        data.income[i].id +
+                        "' data-row-type='income'>" +
+                        "<td class='budget-plus'>+</td>" +
+                        "<td>" +
+                        data.income[i].category +
+                        "</td>" +
+                        "<td></td>" +
+                        "<td>" +
+                        data.income[i].description +
+                        "</td>" +
+                        "<td>$" +
+                        data.income[i].amount +
+                        "</td>" +
+                        "<td class='remove-row'><a href='#'><i class='material-icons right'>clear</i></a></td>" +
+                        "</tr>";
+                }
+            }
+
+            if (data.expense) {
+                for (var i = 0; i < data.expense.length; i++) {
+                    expenseTotal += Number(data.expense[i].amount);
+
+                    if (expenseObj[data.expense[i].category]) {
+                        expenseObj[data.expense[i].category] += Number(data.expense[i].amount);
+                    } else {
+                        expenseObj[data.expense[i].category] = Number(data.expense[i].amount);
+                    }
+
+                    if (expenseCatList.indexOf(data.expense[i].category) === -1) {
+                        expenseCatList.push(data.expense[i].category);
+                    }
+
+                    expenseHtml +=
+                        "<tr data-id='" +
+                        data.expense[i].id +
+                        "' data-row-type='expense'>" +
+                        "<td class='budget-minus'>-</td>" +
+                        "<td>" +
+                        data.expense[i].category +
+                        "</td>" +
+                        "<td>" +
+                        data.expense[i].subCategory +
+                        "</td>" +
+                        "<td>" +
+                        data.expense[i].description +
+                        "</td>" +
+                        "<td>$" +
+                        data.expense[i].amount +
+                        "</td>" +
+                        "<td class='remove-row'><a href='#'><i class='material-icons right'>clear</i></a></td>" +
+                        "</tr>";
+                }
+            }
+
+            var total = incomeTotal - expenseTotal;
+            totalHtml =
+                "<tr>" +
+                "<td></td>" +
+                "<td></td>" +
+                "<td></td>" +
+                "<td></td>" +
+                "<td><strong>Total: $" +
+                total +
+                "</strong></td>" +
+                "</tr>";
+            table.html(incomeHtml + expenseHtml + totalHtml);
+
+            console.log(expenseObj);
+            console.log(expenseCatList);
+            if (expenseCatList.length !== 0) {
+                console.log("ben here");
+                updateGraph(expenseObj, expenseCatList, expenseColors);
+            }
+        }
+        /*function that handles the removal of a row from a table.*/
+        $(document).on("click", ".remove-row", function (e) {
+            e.preventDefault();
+
+            var parentTr = $(this).closest("tr"),
+                idToRemove = parentTr.data("id"),
+                type = parentTr.data("row-type"),
+                idIndex,
+                array;
+
+            if (tableData.income) {
+                for (var i = 0; i < tableData.income.length; i++) {
+                    if (tableData.income[i].id === idToRemove) {
+                        idIndex = i;
+                        array = "income";
+                        break;
+                    }
+                }
+            }
+
+            if (tableData.expense) {
+                for (var i = 0; i < tableData.expense.length; i++) {
+                    if (tableData.expense[i].id === idToRemove) {
+                        idIndex = i;
+                        array = "expense";
+                        break;
+                    }
+                }
+            }
+
+            console.log(idIndex);
+            console.log(array);
+            tableData[array].splice(idIndex, 1);
+
+            updateBudgetTable(tableData);
+        });
+        /*starts by initializing three empty arrays: colors, values, and labels.
+        These arrays will be used to store the colors, data values, and labels for the graph, respectively.
+        In this for loop it will retrieve each value from its resp obj and add it to its resp array using the .push() method*/
+        function updateGraph(obj, arr, colorObj) {
+            var colors = [],
+                values = [],
+                labels = [];
+
+            for (var i = 0; i < arr.length; i++) {
+                colors.push(colorObj[arr[i]]);
+                values.push(obj[arr[i]]);
+                labels.push(arr[i]);
+            }
+
+            console.log(colors);
+            console.log(values);
+            console.log(labels);
+
+            expenseDonutChart.data.datasets[0].data = values;
+            expenseDonutChart.data.datasets[0].backgroundColor = colors;
+            expenseDonutChart.data.labels = labels;
+
+            expenseDonutChart.update();
+        }
+
+    </script>
+    <footer>
+        <!-- Footer content goes here -->
+        <h4 class="text-light">Wandrlust</h4>
+    </footer>
+</body>
+
+</html>

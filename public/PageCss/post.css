@@ -1,0 +1,25 @@
+body{
+  margin: 25px;
+  font-family: verdana;
+}
+
+h1{
+  color: rgb(225, 11, 11);
+}
+
+p {
+  font-size: 12pt;
+  color: black;
+}
+canvas {
+  height: 175px;
+  width: 300px;
+  border-style: solid;
+  border-width: 1px;
+  border-color: black;
+}
+
+input {
+  font-family: verdana;
+  font-size: 12pt;
+}

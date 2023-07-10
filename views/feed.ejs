@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/PageCss/body.css">
+    <title>Feed | Wandrlust</title>
+</head>
+
+<body>
+    <%- include('partials/navbar.ejs', { name: name, isLoggedIn: isLoggedIn, email: email}); %>
+        <!--Section: Newsfeed-->
+        <div style="justify-content: space-around;">
+            <div
+                style="margin-top: 7rem; display: flex; flex-direction: column; gap: 1rem; position: fixed; margin-left: 5rem;">
+                <div class="card"
+                    style="width: 20rem; height: 6rem; border-radius: 1rem; padding: 1rem; display: flex; flex-direction: row; justify-content: space-evenly;">
+                    <div style="margin-top: 3%;">
+                        <i class="fas fa-user-circle text-decoration-none text-black fa-3x"></i>
+                    </div>
+                    <div>
+                        <div id="owner-username" style="font-size: 1.5rem; font-weight: bold;">
+                            <%= username %>
+                        </div>
+                        <div style="color: gray">
+                            <%= email %>
+                        </div>
+                        <input id="ownerId" hidden value="<%= _id %>">
+                    </div>
+                </div>
+                <a style="text-decoration: none;" href="/post">
+                    <button
+                        style="font-size: 1.5rem;color: white; font-weight: bold; background-color: #f94566; width: 20rem; height: 3rem; border-radius: 1rem; border: none;">
+                        Create Post
+                    </button>
+                </a>
+            </div>
+
+        </div>
+        <section style="display: flex; flex-direction: column; gap: 2rem; padding: 8rem; align-items: center;">
+            <% images.forEach(function (image){ %>
+                <div class="card" style="max-width: 40rem; border-radius: 1rem;">
+                    <div class="card-body">
+                        <!-- Data -->
+                        <div class="d-flex mb-3">
+                            <a href="" style="text-decoration: none;">
+                                <img src="/images/profile.png" class="border rounded-circle me-2" alt="Avatar"
+                                    style="height: 40px" />
+                            </a>
+                            <div>
+                                <a href="" class="text-dark mb-0" style="text-decoration: none;">
+                                    <strong>
+                                        <%= image.author.username %>
+                                    </strong>
+                                </a>
+                                <a href="" class="text-muted d-block" style="margin-top: -6px; text-decoration: none;">
+                                    <small>
+                                        <%= image.createdAt.toLocaleString("en-IN", {timeZone: 'Asia/Kolkata' ,
+                                            weekday: "long" , year: "numeric" , month: "long" , day: "numeric" ,
+                                            hour: "numeric" , minute: "numeric" , second: "numeric" }) %>
+                                    </small>
+                                </a>
+                            </div>
+                        </div>
+                        <!-- Description -->
+                        <div style="font-weight: 500;">
+                            <%= image.description %>
+                        </div>
+                    </div>
+
+                    <!-- Media -->
+                    <div class="bg-image hover-overlay ripple rounded-0" data-mdb-ripple-color="light"
+                        style="margin: 1rem;">
+                        <img src="data:image/<%=image.image.contentType%>;base64,
+                        <%=image.image.data.toString('base64')%>" class="w-100" style="border-radius: 1rem;">
+                        <a>
+                            <div class="mask" style="background-color: rgba(251, 251, 251, 0.2)"></div>
+                        </a>
+                    </div>
+                    <!-- Media -->
+                    <!-- Interactions -->
+                    <div class="card-body">
+                        <!-- Reactions -->
+                        <div class="d-flex justify-content-between mb-3">
+                            <div>
+                                <%= image.caption %>
+                            </div>
+                            <div>
+                                <% if(image.likes.includes(_id)){ %>
+                                    <a href="" style="text-decoration: none;" onclick="decreaseLikes('<%=image._id%>')">
+                                        <i class="fas fa-heart text-danger"></i>
+                                        <span>
+                                            <%= image.likes.length %>
+                                        </span>
+                                    </a>
+
+                                    <%} else{ %>
+                                        <a href="" style="text-decoration: none;"
+                                            onclick="increaseLikes('<%=image._id%>')">
+                                            <i class="fas fa-heart text-danger"></i>
+                                            <span>
+                                                <%= image.likes.length %>
+                                            </span>
+                                        </a>
+                                        <% } %>
+
+                            </div>
+                        </div>
+                        <!-- Reactions -->
+
+                    </div>
+                    <!-- Interactions -->
+                </div>
+                <% }); %>
+        </section>
+        <div>
+            <div class="card"
+                style="width: 25rem; height: 25rem; border-radius: 1rem; padding: 1rem; position: fixed; right: 0; top: 0; margin-top: 7rem; margin-right: 1rem;">
+                <div style="font-size: 1rem; font-weight: bold;">
+                    Suggested people
+                </div>
+                <div class="input-group rounded" style="padding-top: 1rem; padding-bottom: 1rem">
+                    <input id="search-input" type="search" class="form-control rounded" placeholder="Search User"
+                        aria-label="Search" aria-describedby="search-addon" onchange="inputHandler()" />
+                    <span class="input-group-text border-0" id="search-addon">
+                        <i class="fas fa-search"></i>
+                    </span>
+                </div>
+                <div id="AllUsers" style="display: flex; flex-direction: column; font-size: 1rem; gap: 1rem;">
+                    <% users.forEach(function (user){ %>
+                        <% if(user.username !==username ) {%>
+                            <div style="display: flex; flex-direction: row; gap: 1rem;">
+                                <div>
+                                    <i class="fas fa-user-circle text-decoration-none text-black fa-3x"></i>
+                                </div>
+                                <div style="display: flex; flex-direction: column;">
+                                    <div style="font-weight: bold">
+                                        <%= user.username %>
+                                    </div>
+                                    <div>
+                                        <%= user.email %>
+                                    </div>
+                                </div>
+                                <div
+                                    style="right: 0;display: flex;flex-direction: column;align-items: flex-end;width: 100%;justify-content: center;">
+                                    <% if(user.followers.includes(_id)){ %>
+                                        <button onclick="UnFollowUser('<%= user._id %>')"
+                                            style="background-color: #f94566; color: white; border-radius: .5rem; border: none;">
+                                            Unfollow
+                                        </button>
+                                        <% } else {%>
+                                            <button onclick="FollowUser('<%= user._id %>')"
+                                                style="background-color: #f94566; color: white; border-radius: .5rem; border: none;">
+                                                Follow
+                                            </button>
+                                            <% } %>
+                                </div>
+                            </div>
+                            <% } %>
+                                <% }); %>
+                </div>
+            </div>
+        </div>
+        </div>
+
+        <!--Section: Newsfeed-->
+        <%- include('partials/footer') %>
+            <script>
+
+                const ownerUsername = document.getElementById("owner-username")
+                const ownerId = document.getElementById("ownerId")
+                let AllUsers = document.getElementById("AllUsers")
+                const increaseLikes = async (imageId) => {
+                    await fetch("/like", {
+                        method: "put",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify({
+                            imageId
+                        })
+                    })
+                }
+
+                const decreaseLikes = async (imageId) => {
+                    await fetch("/dislike", {
+                        method: "put",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify({
+                            imageId
+                        })
+                    })
+                }
+
+                const FollowUser = async (followingId) => {
+                    await fetch("/follow", {
+                        method: "put",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify({
+                            followingId
+                        })
+                    })
+                    location.reload(true)
+                }
+
+                const UnFollowUser = async (followingId) => {
+                    await fetch("/unfollow", {
+                        method: "put",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                        body: JSON.stringify({
+                            followingId
+                        })
+                    })
+                    location.reload(true)
+                }
+
+
+
+                let searchInput = document.getElementById("search-input")
+                const inputHandler = async () => {
+                    let query = searchInput.value
+
+                    let res = await fetch("/filter", {
+                        method: 'post',
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                    })
+                    res = await res.json()
+                    console.log(res.users);
+                    let filteredData = res.users.filter(user => user.username.toLowerCase().includes(query.toLowerCase()))
+                    console.log(filteredData);
+
+                    while (AllUsers.hasChildNodes()) {
+                        AllUsers.removeChild(AllUsers.firstChild);
+                    }
+                    filteredData.forEach(user => {
+                        if (user._id !== ownerId.value) {
+                            aUser = document.createElement("div");
+                            aUser.id = "aUser"
+                            aUser.style = "display: flex; flex-direction: row; gap: 1rem;"
+
+                            UserDetails = document.createElement("div");
+                            UserDetails.id = "UserDetails"
+                            UserDetails.style = "display: flex; flex-direction: column;"
+
+                            let profile = document.createElement("div");
+                            let icon = document.createElement("i")
+                            icon.classList.add(..."fas fa-user-circle text-decoration-none text-black fa-3x".split(" "))
+                            profile.appendChild(icon)
+
+                            username = document.createElement("div");
+                            username.id = "username"
+                            username.style = "font-weight: bold"
+                            username.innerHTML = user.username
+
+                            email = document.createElement("div");
+                            email.id = "email"
+                            email.innerHTML = user.email
+
+                            followUnfollow = document.createElement("div")
+                            followUnfollow.id = "followUnfollow"
+                            followUnfollow.style = "right: 0;display: flex;flex-direction: column;align-items: flex-end;width: 100%;justify-content: center;"
+
+                            unfollowButton = document.createElement("button")
+                            unfollowButton.id = "unfollow"
+                            unfollowButton.style = "background-color: #f94566; color: white; border-radius: .5rem; border: none;"
+                            unfollowButton.innerHTML = "Unfollow"
+                            unfollowButton.addEventListener('click', () => { UnFollowUser(user._id) })
+
+                            followButton = document.createElement("button")
+                            followButton.id = "follow"
+                            followButton.style = "background-color: #f94566; color: white; border-radius: .5rem; border: none;"
+                            followButton.innerHTML = "Follow"
+                            followButton.addEventListener('click', () => { FollowUser(user._id) })
+
+                            if (user.followers.includes(ownerId.value)) {
+                                followUnfollow.appendChild(unfollowButton)
+                            }
+                            else {
+                                followUnfollow.appendChild(followButton)
+                            }
+                            UserDetails.appendChild(username)
+                            UserDetails.appendChild(email)
+                            aUser.appendChild(profile)
+                            aUser.appendChild(UserDetails)
+                            aUser.appendChild(followUnfollow)
+                            AllUsers.appendChild(aUser);
+                        }
+                    })
+                }
+
+
+            </script>
+</body>
+
+</html>

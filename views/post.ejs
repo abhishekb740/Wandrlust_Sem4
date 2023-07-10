@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post Image | Wandrlust</title>
+    <link rel="stylesheet" href="/PageCss/body.css">
+    <link href="/PageCss/faq.css" rel="stylesheet">
+    <link href="/PageCss/post.css" rel="stylesheet">
+</head>
+
+<body>
+    <%- include('partials/navbar.ejs', { name: name, isLoggedIn: isLoggedIn, email: email}); %>
+        <form action="/uploadPhoto" enctype="multipart/form-data" method="post" style="display: flex; justify-content: center;">
+            <div class="card" style="display: flex; flex-direction: column; margin-top: 5rem; gap: 1rem; width: 50%; align-items: center; border-radius: 2rem">
+                <h1 style="color: gray; letter-spacing: 2px; padding-top: 1rem">What's on your mind?   </h1>
+                <div style="display: flex; justify-content: center;">
+                    <div style="padding: 1rem; display: flex; flex-direction: column; gap: 1rem">
+                        <canvas width="500" height="500" id="canv1" style="border: 1px solid black; border-radius: 1rem;"></canvas>
+                        <div>
+                            Choose an image: 
+                            <input type="file" name="myImage" multiple="false" accept="image/*" id=finput
+                                onchange={upload()} required>
+                        </div>
+                    </div>
+                    <div style="margin-top: 2rem; display: flex; flex-direction: column; gap: 1rem">
+                        <div>
+                            <input style="border-radius: 6px; font-size: 20px; border: 1px solid gray; padding: 1rem;" type="text" size="30" name="description" id="description" placeholder="Enter a title for the post" class="input-field"
+                                required>
+                        </div>
+                        <div>
+                            <input style="border-radius: 6px; font-size: 20px; border: 1px solid gray; padding: 1rem;" type="text" size="30" name="caption" id="caption" placeholder="Enter a caption for the post" class="input-field" required>
+                        </div>
+                    </div>
+                </div>
+                <div style="padding-bottom: 2rem;">
+                    <input class="btn-dark" style="width: 8rem; height: 3rem; font-size: 1rem; border-radius: 2rem;" type="submit" value="Post" />
+                </div>
+            </div>
+        </form>
+        <section class="h-100 gradient-custom-2">
+            <div class="container py-5 h-100">
+                <div class="row d-flex justify-content-center align-items-center h-100">
+                    <div class="col col-lg-9 col-xl-7">
+                        <div class="card">
+                            <div class="card-body p-4 text-black">
+                                <div class="d-flex justify-content-between align-items-center mb-4">
+                                    <p class="lead fw-normal mb-0">Your photos</p>
+                                </div>
+                                <% images.forEach(function (image){ %>
+                                    <div class="row g-2">
+                                        <div class="col">
+                                            <!-- <img src="https://mdbcdn.b-cdn.net/img/Photos/Lightbox/Original/img%20(108).webp"
+                                                alt="image 1" class="w-100 rounded-3"> -->
+                                            <img class="w-100 rounded-3" src="data:image/<%=image.image.contentType%>;base64,
+                                            <%=image.image.data.toString('base64')%>">
+                                        </div>
+                                    </div>
+                                    <div class="d-flex justify-content-between mb-3">
+                                        <div>
+                                            <i class="fas fa-heart text-danger"></i>
+                                            <span>
+                                                <%= image.likes.length %>
+                                            </span>
+                                        </div>
+                                        <div>
+                                            <p>
+                                                <%= image.description %>
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <% }); %>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <script async="" src="https://www.dukelearntoprogram.com/course1/common/js/image/SimpleImage.js"></script>
+        <script>
+            function upload() {
+                var imgcanvas = document.getElementById("canv1");
+                var fileinput = document.getElementById("finput");
+                console.log(fileinput);
+                var image = new SimpleImage(fileinput);
+                console.log(image);
+                image.drawTo(imgcanvas);
+            }
+        </script>
+        <%- include('partials/footer') %>
+</body>
+
+</html>

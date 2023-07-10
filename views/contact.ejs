@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us | Wandrlust</title>
+    <link href="/PageCss/body.css" rel="stylesheet">
+    <style>
+        @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+        .container {
+            max-width: 1200px;
+            width: 90%;
+            margin: 0 auto;
+        }
+
+        :root {
+            /* //....... Color ........// */
+            --primary-color: #ff3c78;
+            --light-black: rgba(0, 0, 0, 0.89);
+            --black: #000;
+            --white: #fff;
+            --grey: #aaa;
+        }
+
+        .contact {
+            margin-top: 45px;
+        }
+
+        .form {
+            display: flex;
+            justify-content: space-between;
+            margin: 80px 0;
+        }
+
+        .form .form-txt {
+            flex-basis: 48%;
+        }
+
+        .form .form-txt h1 {
+            font-weight: 600;
+            color: var(--black);
+            font-size: 40px;
+            letter-spacing: 1.5px;
+            margin-bottom: 10px;
+            color: var(--light-black);
+        }
+
+        .form .form-txt span {
+            color: var(--light-black);
+            font-size: 14px;
+        }
+
+        .form .form-txt h3 {
+            font-size: 22px;
+            font-weight: 600;
+            margin: 15px 0;
+            color: var(--light-black);
+        }
+
+        .form .form-txt p {
+            color: var(--light-black);
+            font-size: 14px;
+        }
+
+        .form .form-details {
+            flex-basis: 48%;
+        }
+
+        .form .form-details input[type="text"],
+        .form .form-details input[type="email"] {
+            padding: 15px 20px;
+            color: var(--black);
+            outline: none;
+            border: 1px solid var(--grey);
+            margin: 35px 15px;
+            font-size: 14px;
+        }
+
+        .form .form-details textarea {
+            padding: 15px 20px;
+            margin: 0 15px;
+            color: var(--black);
+            outline: none;
+            border: 1px solid var(--grey);
+            font-size: 14px;
+            resize: none;
+        }
+
+        .form .form-details button {
+            padding: 15px 25px;
+            color: var(--white);
+            font-weight: 500;
+            background: var(--black);
+            outline: none;
+            border: none;
+            margin: 15px;
+            font-size: 14px;
+            letter-spacing: 2px;
+            cursor: pointer;
+        }
+
+        @media (max-width: 500px) {
+            .form {
+                display: flex;
+                flex-direction: column;
+            }
+
+            .form .form-details button {
+                margin-left: 0;
+            }
+
+            .form .form-details input[type="text"],
+            .form .form-details input[type="email"],
+            .form .form-details textarea {
+                width: 100%;
+                margin-left: 0;
+            }
+
+            .form .form-details input[type="text"] {
+                margin-bottom: 0px;
+            }
+        }
+
+        @media(min-width: 501px) and (max-width: 768px) {
+            .form {
+                display: flex;
+                flex-direction: column;
+            }
+
+            .form .form-details button {
+                margin-left: 0;
+            }
+
+            .form .form-details input[type="text"],
+            .form .form-details input[type="email"],
+            .form .form-details textarea {
+                width: 100%;
+                margin-left: 0;
+            }
+
+            .form .form-details input[type="text"] {
+                margin-bottom: 0px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <%- include('partials/navbar.ejs', { name: name, isLoggedIn: isLoggedIn, email: email}); %>
+        <div class="contact container" id="form-container">
+            <form action="/sendMail" method="post">
+                <div class="form">
+                    <div class="form-txt">
+                        <h1>Contact Us</h1>
+                        <span>As you might expect of a company that began as a high-end interiors contractor, we pay
+                            strict
+                            attention.</span>
+                        <h3>India</h3>
+                        <p>Indian Institute of Information Technology, Sri City, Chittoor, Andrha Pradesh<br>517646</p>
+                    </div>
+                    <div class="form-details">
+                        <input type="text" name="name" id="name" placeholder="Name" required>
+                        <input onchange={validateEmail()} type="email" name="email" id="email" placeholder="Email"
+                            required>
+                        <textarea name="message" id="message" cols="52" rows="7" placeholder="Message"
+                            required></textarea>
+                        <button type="submit">SEND MESSAGE</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <%- include('partials/footer') %>
+            <script>
+                let regexEmail = /^[A-Za-z0-9._]+@[A-Za-z]+[.][A-Za-z]+$/
+                const validateEmail = () => {
+                    let email = document.getElementById("email")
+                    if (!email.value.match(regexEmail)) {
+                        alert("Please enter valid Email")
+                        email.value = "";
+                    }
+                }
+            </script>
+</body>
+
+</html>

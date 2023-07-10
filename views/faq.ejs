@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FAQ | Wandrlust</title>
+    <link href="/PageCss/faq.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" />
+</head>
+
+<body>
+    <%- include('partials/navbar.ejs', { name: name, isLoggedIn: isLoggedIn, email: email}); %>
+        <h1 style="padding: 3rem; font-weight: bold; padding-top: 5rem;">Frequently Asked Questions</h1>
+        <div style="display: flex; flex-direction: row; justify-content: space-evenly; padding-bottom: 2rem;">
+            <div>
+                <div class="faq-container">
+                    <div class="faq">
+                        <h3 class="faq-title">
+                            Lorem ipsum dolor sit amet.
+                        </h3>
+                        <p class="faq-text">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quod nobis,
+                            repellat
+                            neque non
+                            dicta
+                            fugiat veritatis sit delectus perspiciatis quis?</p>
+                        <button class="faq-toggle">
+                            <i class="fas fa-angle-down"></i>
+                        </button>
+                    </div>
+
+                    <div class="faq active">
+                        <h3 class="faq-title">
+                            Lorem ipsum dolor sit amet.
+                        </h3>
+                        <p class="faq-text">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quod nobis,
+                            repellat
+                            neque non
+                            dicta
+                            fugiat veritatis sit delectus perspiciatis quis?</p>
+                        <button class="faq-toggle">
+                            <i class="fas fa-angle-down"></i>
+                        </button>
+                    </div>
+
+                    <div class="faq">
+                        <h3 class="faq-title">
+                            Lorem ipsum dolor sit amet.
+                        </h3>
+                        <p class="faq-text">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quod nobis,
+                            repellat
+                            neque non
+                            dicta
+                            fugiat veritatis sit delectus perspiciatis quis?</p>
+                        <button class="faq-toggle">
+                            <i class="fas fa-angle-down"></i>
+                        </button>
+                    </div>
+
+                    <div class="faq">
+                        <h3 class="faq-title">
+                            Lorem ipsum dolor sit amet.
+                        </h3>
+                        <p class="faq-text">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quod nobis,
+                            repellat
+                            neque non
+                            dicta
+                            fugiat veritatis sit delectus perspiciatis quis?</p>
+                        <button class="faq-toggle">
+                            <i class="fas fa-angle-down"></i>
+                        </button>
+                    </div>
+
+                    <div class="faq">
+                        <h3 class="faq-title">
+                            Lorem ipsum dolor sit amet.
+                        </h3>
+                        <p class="faq-text">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quod nobis,
+                            repellat
+                            neque non
+                            dicta
+                            fugiat veritatis sit delectus perspiciatis quis?</p>
+                        <button class="faq-toggle">
+                            <i class="fas fa-angle-down"></i>
+                        </button>
+                    </div>
+
+                    <div class="faq">
+                        <h3 class="faq-title">
+                            Lorem ipsum dolor sit amet.
+                        </h3>
+                        <p class="faq-text">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quod nobis,
+                            repellat
+                            neque non
+                            dicta
+                            fugiat veritatis sit delectus perspiciatis quis?</p>
+                        <button class="faq-toggle">
+                            <i class="fas fa-angle-down"></i>
+                        </button>
+                    </div>
+
+                    <div class="faq">
+                        <h3 class="faq-title">
+                            Lorem ipsum dolor sit amet.
+                        </h3>
+                        <p class="faq-text">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quod nobis,
+                            repellat
+                            neque non
+                            dicta
+                            fugiat veritatis sit delectus perspiciatis quis?</p>
+                        <button class="faq-toggle">
+                            <i class="fas fa-angle-down"></i>
+                        </button>
+                    </div>
+
+                    <div class="faq">
+                        <h3 class="faq-title">
+                            Lorem ipsum dolor sit amet.
+                        </h3>
+                        <p class="faq-text">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quod nobis,
+                            repellat
+                            neque non
+                            dicta
+                            fugiat veritatis sit delectus perspiciatis quis?</p>
+                        <button class="faq-toggle">
+                            <i class="fas fa-angle-down"></i>
+                        </button>
+                    </div>
+
+                    <div class="faq">
+                        <h3 class="faq-title">
+                            Lorem ipsum dolor sit amet.
+                        </h3>
+                        <p class="faq-text">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quod nobis,
+                            repellat
+                            neque non
+                            dicta
+                            fugiat veritatis sit delectus perspiciatis quis?</p>
+                        <button class="faq-toggle">
+                            <i class="fas fa-angle-down"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div style="display: flex; justify-content: center; align-items: center;">
+                <img src="/Gifs/81967-contact-us.gif" height="70%">
+            </div>
+        </div>
+        <%- include('partials/footer') %>
+            <script>
+                console.log("Working");
+                const buttons = document.querySelectorAll(".faq-toggle");
+                console.log(buttons);
+                buttons.forEach((button) => {
+                    button.addEventListener("click", () =>
+                        button.parentElement.classList.toggle("active")
+                    );
+                });
+            </script>
+</body>
+
+</html>

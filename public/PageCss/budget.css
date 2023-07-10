@@ -1,0 +1,44 @@
+.budget-app {
+  margin-top: -7px;
+}
+
+.card-panel {
+  padding: 20px 10px;
+}
+
+.budget-header h5 {
+  margin: 0;
+}
+
+.budget-plus {
+  text-align: center;
+  background: #fffdfd;
+  width: 20px;
+}
+
+.budget-minus {
+  text-align: center;
+  background: #ffb6a9;
+  width: 20px;
+}
+
+.remove-row {
+  width: 20px;
+}
+
+.remove-row a {
+  color: tomato;
+}
+footer {
+  background-color: #1c1c1c;
+  height: 20vh;
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+}
+.text-light {
+  color: rgba(239, 235, 220, 0.81);
+  font-size: 2.5rem;
+  margin-top: 3rem;
+  text-align: center;
+}

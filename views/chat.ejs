@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css"
+        integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+    <!-- <link rel="stylesheet" href="css/style.css" /> -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway&display=swap" rel="stylesheet">
+    <title>ChatCord App</title>
+</head>
+
+<body>
+    <%- include('partials/navbar.ejs', { name: name, isLoggedIn: isLoggedIn, email: email}); %>
+        <div style="display: flex; justify-content: center; margin: 5rem; padding: 1rem;">
+            <div class="chat-container"
+                style="border-radius: 1rem; border: 5px solid #f94566; background-color: rgb(240, 242, 242); color: black; width: 70%; display: flex; flex-direction: column; padding: 1rem; align-items: center; gap: 3rem">
+                <header class="chat-header" style="display: flex; width: 100%; justify-content: space-between;">
+                    <div></div>
+                    <h1 style="color: #f94566; font-family: 'Raleway', sans-serif;">WandrChat</h1>
+                    <button id="leave-btn" class="btn"
+                        style="border-radius: 1rem; background-color: #f94566; color: white; font-weight: bold;">Leave Room</button>
+                </header>
+                <main class="chat-main" style="display: flex; gap: 5rem;">
+                    <div class="chat-sidebar" style="display: flex; flex-direction: column; gap: 1rem">
+                        <div style="display: flex;">
+                            <h3><i class="fas fa-comments"></i> Room Name:&nbsp</h3>
+                            <h3 id="room-name"></h3>
+                        </div>
+                        <h3><i class="fas fa-users"></i> Users</h3>
+                        <ul id="users"></ul>
+                    </div>
+                    <div style="display: flex; flex-direction: column; gap: 1rem">
+                        <div class="chat-messages" style="background-color: #71738d; border-radius: 1rem; padding: 1rem"></div>
+                        <div class="chat-form-container">
+                            <form id="chat-form" style="display: flex; gap: 1rem;">
+                                <input id="msg" style="font-size: 1rem; border-radius: 7px; padding: .5rem" type="text"
+                                    placeholder="Enter Message" required autocomplete="off" />
+                                <button class="btn" style="background-color: #f94566; color: white"><i
+                                        class="fas fa-paper-plane"></i> Send</button>
+                            </form>
+                        </div>
+                    </div>
+                </main>
+            </div>
+        </div>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/qs/6.9.2/qs.min.js"
+            integrity="sha256-TDxXjkAUay70ae/QJBEpGKkpVslXaHHayklIVglFRT4=" crossorigin="anonymous"></script>
+        <script src="/socket.io/socket.io.js"></script>
+        <script src="js/main.js"></script>
+</body>
+
+</html>
